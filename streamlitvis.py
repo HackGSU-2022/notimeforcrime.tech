@@ -41,6 +41,7 @@ df['occur_datet_new'] = pd.to_datetime(df['occur_datet_new'])
 
 data = df.copy()
 data = data.dropna(subset=['lat', 'long'])
+# here
 choice = st.sidebar.multiselect('Select type of Crimes', (sorted(list(data.ucr_literal.unique()))))
 st.sidebar.markdown(" #### Select the hour range (in Military Time)")
 
