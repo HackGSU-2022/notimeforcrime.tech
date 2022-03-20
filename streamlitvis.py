@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -40,12 +39,9 @@ df = loader()
 df['occur_datet_new'] = df['occur_date'] + ' ' + df['occur_time']
 df['occur_datet_new'] = pd.to_datetime(df['occur_datet_new'])
 
-# DATA_URL = os.path.join(os.path.dirname(__file__), './Dataset/df.csv')
-
 data = df.copy()
 data = data.dropna(subset=['lat', 'long'])
-choice = st.sidebar.multiselect(
-    'Select type of Crimes', (sorted(list(data.ucr_literal.unique()))))
+choice = st.sidebar.multiselect('Select type of Crimes', (sorted(list(data.ucr_literal.unique()))))
 st.sidebar.markdown(" #### Select the hour range (in Military Time)")
 
 if not st.sidebar.checkbox("All day", True, key='2'):
