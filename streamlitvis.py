@@ -1,28 +1,12 @@
 import os
 import streamlit as st
 import pandas as pd
-
-
-
-
 import plotly_express as px
-
-
-
-
 import plotly.graph_objects as go
-
-
 import matplotlib.pyplot as plt
 from streamlit_folium import folium_static
 import folium
-
-
-
-
 from folium.plugins import HeatMap
-
-
 
 
 month_days = {'January': 31, 
@@ -38,60 +22,26 @@ month_days = {'January': 31,
               'October': 31, 'November': 30, 'December': 30}
 
 
-
-
 month_to_num = {key: i+1 for i, key in enumerate(month_days)}
-
-
-
 
 num_to_month = {(i+1): key for i, key in enumerate(month_days)}
 
-
-
-
 st.title('Atlanta Crime Statistics')
-
-
-
 
 @st.cache(allow_output_mutation=True)
 def loader():
-
-
     df09to19 = pd.read_csv('./Dataset/2009-2019.csv',  low_memory=False)
-
-
     df20p1 = pd.read_csv('./Dataset/2020p1.csv',  low_memory=False)
-
-
     df20p2 = pd.read_csv('./Dataset/2020p2.csv',  low_memory=False)
-
-
     df21 = pd.read_csv('./Dataset/2021.csv',  low_memory=False)
-
-
     df22 = pd.read_csv('./Dataset/2022.csv',  low_memory=False)
-
-
     df = pd.concat([df09to19, df20p1, df20p2, df21, df22])
     return df
 
-
 df = loader()
 
-
-
-
 df = df[['Occur Date', 'Occur Time', 'Possible Date', 'Possible Time',
-
-
-
-
          'Location', 'UCR Literal', 'Neighborhood', 'Latitude', 'Longitude', ]]
-
-
-
 
 df.columns = df.columns.str.replace('Occur Date', 'occur_date')
 
@@ -478,5 +428,3 @@ fig = px.bar(df, x='day', y='amount', height=500)
 
 
 st.plotly_chart(fig)
-
-
